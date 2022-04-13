@@ -7,8 +7,10 @@ import javax.persistence.*;
 public class Domicilio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @Column(name = "id")
+    @SequenceGenerator(name = "domicilio_sequence", sequenceName = "domicilio_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "domicilio_sequence")
     private Integer id;
     private String calle;
     private String numero;

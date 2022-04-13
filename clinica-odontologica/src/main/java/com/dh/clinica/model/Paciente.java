@@ -10,8 +10,10 @@ import java.util.Set;
 public class Paciente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    // @Column(name="id")
+    @SequenceGenerator(name = "paciente_sequence", sequenceName = "paciente_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paciente_sequence")
     private Integer id;
     private String nombre;
     private String apellido;
@@ -58,9 +60,9 @@ public class Paciente {
         return id;
     }
 
-    public void setId(Integer id) {
+    /*public void setId(Integer id) {
         this.id = id;
-    }
+    } */
 
     public String getNombre() {
         return nombre;

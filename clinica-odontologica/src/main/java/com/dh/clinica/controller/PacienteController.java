@@ -15,8 +15,9 @@ public class PacienteController {
 
     @PostMapping()
     public ResponseEntity<Paciente> registrarPaciente(@RequestBody Paciente paciente) {
-
+        System.out.println("Guardado");
         return ResponseEntity.ok(pacienteService.guardar(paciente));
+
 
     }
 

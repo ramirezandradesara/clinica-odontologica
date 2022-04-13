@@ -2,6 +2,7 @@ package com.dh.clinica.controller;
 
 import com.dh.clinica.model.Odontologo;
 
+import com.dh.clinica.model.OdontologoDTO;
 import com.dh.clinica.service.OdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -17,22 +19,20 @@ public class OdontologoController {
     @Autowired
     private OdontologoService odontologoService;
 
-     /* @GetMapping("/{apellido}")
-    public ResponseEntity<Odontologo> listarOdontologoApellido (@PathVariable String apellido){
-        Odontologo odontologo = odontologoService.buscarOdontologoPorApellido(apellido);
-        if(odontologo != null){
-            return ResponseEntity.ok(odontologo);
-        }else{
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
-    } */
 
     @PostMapping()
+    public ResponseEntity<?> registrarOdontologo(@RequestBody OdontologoDTO odontologoDTO) {
+        odontologoService.registrarOdontologo2(odontologoDTO);
+        return ResponseEntity.ok(HttpStatus.OK);
+
+    }
+
+    /* @PostMapping()
     public ResponseEntity<Odontologo> registrarOdontologo(@RequestBody Odontologo odontologo) {
 
         return ResponseEntity.ok(odontologoService.registrarOdontologo(odontologo));
 
-    }
+    } */
 
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) {
@@ -71,6 +71,14 @@ public class OdontologoController {
         return ResponseEntity.ok(odontologoService.buscarTodos());
     }
 
-
+    @GetMapping("/traerApellido/{apellido}")
+    public ResponseEntity<Odontologo> odontologoApellido (@PathVariable String apellido){
+        Odontologo odontologo = odontologoService.buscarOdontologoPorApellido(apellido);
+        if(odontologo != null){
+            return ResponseEntity.ok(odontologo);
+        }else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 
 }
