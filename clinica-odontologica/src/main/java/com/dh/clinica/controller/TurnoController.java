@@ -27,13 +27,10 @@ public class TurnoController {
         ResponseEntity<Turno> response;
         if (pacienteService.buscar(turno.getPaciente().getId()).isPresent() && odontologoService.buscar(turno.getOdontologo().getId()).isPresent())
             response = ResponseEntity.ok(turnoService.registrarTurno(turno));
-
         else
             response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
         return response;
-
-
     }
 
     @GetMapping

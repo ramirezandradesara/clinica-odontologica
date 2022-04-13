@@ -44,7 +44,7 @@ $(document).ready(function(){
                     $("#response").empty();                                    
                     $("#response").append(errorAlert);
                     $("#response").css({"display": "block"});
-                    //location.reload();
+                    location.reload();
                 }
             });
         } catch(error){
