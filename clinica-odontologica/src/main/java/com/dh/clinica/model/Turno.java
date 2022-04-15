@@ -1,5 +1,7 @@
 package com.dh.clinica.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -13,13 +15,15 @@ public class Turno {
     @SequenceGenerator(name = "turno_sequence", sequenceName = "turno_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "turno_sequence")
     private Integer id;
+    //@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "paciente_id")
-    //@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
     private Paciente paciente;
+    //@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "odontologo_id")
-   // @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
+    @JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
     private Odontologo odontologo;
     private Date date;
 

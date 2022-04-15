@@ -1,5 +1,7 @@
 package com.dh.clinica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +17,7 @@ public class Odontologo {
     private String nombre;
     private String apellido;
     private Integer matricula;
+    @JsonIgnore
     @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY)
     private Set<Turno> turnos = new HashSet<>();
 

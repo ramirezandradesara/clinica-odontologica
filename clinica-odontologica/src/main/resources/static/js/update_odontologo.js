@@ -24,11 +24,11 @@ $(document).ready(function(){
         
                     let successAlert = '<div class="alert alert-success alert-dismissible">' + 
                                             '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                                            '<strong> odontologo actualizado </strong></div>'
+                                            '<strong> Odontologo actualizado </strong></div>'
 
                  
-                    $("#tr_" + odontologoId + " td.td_first_name").text(odontologo.nombre.toUpperCase());
-                    $("#tr_" + odontologoId + " td.td_last_name").text(odontologo.apellido.toUpperCase());
+                    $("#tr_" + odontologoId + " td.td_first_name").text(odontologo.nombre);
+                    $("#tr_" + odontologoId + " td.td_last_name").text(odontologo.apellido);
                     $("#tr_" + odontologoId + " td.td_matricula").text(odontologo.matricula);
 
                     $("#response").empty();
