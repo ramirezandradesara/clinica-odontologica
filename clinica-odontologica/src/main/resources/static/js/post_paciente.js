@@ -34,7 +34,7 @@ window.addEventListener('load', function() {
                 // Si no hay ningun error se muestra un mensaje diciendo que le paciente se agrego bien
                  let successAlert = '<div class="alert alert-success alert-dismissible">' +
                  '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                 '<strong></strong> Paciente agregade </div>'
+                 '<strong></strong> Paciente agregado </div>'
 
                  document.querySelector('#response').innerHTML = successAlert;
                  document.querySelector('#response').style.display = "block";
