@@ -56,6 +56,14 @@ public class OdontologoService {
         return odontologoRepository.findById(id);
     }
 
+    /*
+
+    public Optional<Odontologo> buscar(Integer id) throws ResourceNotFoundException {
+        if(!odontologoRepository.existsById(id))
+            throw new ResourceNotFoundException("El odontologo con id" + id + " no existe.");
+        odontologoRepository.findById(id);
+    }
+     */
     public List<Odontologo> buscarTodos() {
         return odontologoRepository.findAll();
     }
