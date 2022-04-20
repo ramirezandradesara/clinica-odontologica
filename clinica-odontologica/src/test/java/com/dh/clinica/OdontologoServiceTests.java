@@ -25,8 +25,6 @@ public class OdontologoServiceTests {
 
     public void cargarDataSet() {
         this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
-
-
     }
 
     @Test
