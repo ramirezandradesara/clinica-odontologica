@@ -1,5 +1,7 @@
 package com.dh.clinica;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.service.OdontologoService;
 
@@ -22,7 +24,6 @@ public class OdontologoServiceTests {
     @Autowired
     private OdontologoService odontologoService;
 
-
     public void cargarDataSet() {
         this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
     }
@@ -36,8 +37,8 @@ public class OdontologoServiceTests {
     }
 
     @Test
-    public void eliminarOdontologoTest() {
-        odontologoService.eliminar(1);
+    public void eliminarOdontologoTest() throws ResourceNotFoundException, BadRequestException {
+        odontologoService.eliminarOdontologo(1);
         Assert.assertTrue(odontologoService.buscar(1).isEmpty());
 
     }

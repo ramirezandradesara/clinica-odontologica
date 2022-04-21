@@ -1,5 +1,7 @@
 package com.dh.clinica.controller;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
 
 import com.dh.clinica.model.OdontologoDTO;
@@ -22,7 +24,7 @@ public class OdontologoController {
 
     @PostMapping()
     public ResponseEntity<?> registrarOdontologo(@RequestBody OdontologoDTO odontologoDTO) {
-        odontologoService.registrarOdontologo2(odontologoDTO);
+        odontologoService.registrarOdontologo(odontologoDTO);
         return ResponseEntity.ok(HttpStatus.OK);
 
     }
@@ -35,13 +37,13 @@ public class OdontologoController {
     } */
 
     @GetMapping("/{id}")
-    public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) {
+    public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
         Odontologo odontologo = odontologoService.buscar(id).orElse(null);
 
         return ResponseEntity.ok(odontologo);
     }
 
-    @PutMapping()
+   /* @PutMapping()
     public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) {
         ResponseEntity<Odontologo> response = null;
 
@@ -51,9 +53,14 @@ public class OdontologoController {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         return response;
+    } */
+
+    @PutMapping()
+    public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) throws ResourceNotFoundException, BadRequestException {
+        return ResponseEntity.ok(odontologoService.actualizar(odontologo));
     }
 
-    @DeleteMapping("/{id}")
+    /* @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Integer id) {
         ResponseEntity<String> response = null;
 
@@ -65,7 +72,23 @@ public class OdontologoController {
         }
 
         return response;
+    }*/
+
+    /* @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException {
+        odontologoService.eliminar(id);
+        return ResponseEntity.ok("Odontologo eliminado");
+    }*/
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity eliminarPorId(@PathVariable Integer id) throws BadRequestException, ResourceNotFoundException {
+        odontologoService.eliminarOdontologo(id);
+        return ResponseEntity.ok("Se eliminó el odontólogo con ID: " + id);
     }
+
+
+
+
     @GetMapping
     public ResponseEntity<List<Odontologo>> buscarTodos(){
         return ResponseEntity.ok(odontologoService.buscarTodos());
@@ -81,4 +104,8 @@ public class OdontologoController {
         }
     }
 
+    /*@ExceptionHandler({ResourceNotFoundException.class})
+    public ResponseEntity<String> procesarErrorNotFound(ResourceNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }*/
 }

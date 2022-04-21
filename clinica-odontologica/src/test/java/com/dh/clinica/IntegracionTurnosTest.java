@@ -1,5 +1,7 @@
 package com.dh.clinica;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Domicilio;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
@@ -36,7 +38,7 @@ public class IntegracionTurnosTest {
     @Autowired
     private MockMvc mockMvc;
 
-    public void cargarDataSet() {
+    public void cargarDataSet() throws ResourceNotFoundException, BadRequestException {
         Domicilio domicilio = new Domicilio("Av Santa fe", "444", "CABA", "Buenos Aires");
         Paciente p = pacienteService.guardar(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
         this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));

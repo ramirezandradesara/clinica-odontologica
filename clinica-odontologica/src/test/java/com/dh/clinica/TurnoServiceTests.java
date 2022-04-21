@@ -1,5 +1,7 @@
 package com.dh.clinica;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Domicilio;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
@@ -38,7 +40,7 @@ public class TurnoServiceTests {
     }
 
     @Test
-    public void altaTurnoTest(){
+    public void altaTurnoTest() throws ResourceNotFoundException, BadRequestException {
 
 
         this.cargarDataSet();

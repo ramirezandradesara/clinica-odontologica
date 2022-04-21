@@ -23,28 +23,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                //.authorizeRequests()
-                // .antMatchers("/user/**") //.hasRole("USER") // ** indica que accede a TODO
-                //.permitAll()
-                //.anyRequest()
-                //.authenticated().and()
-                //.formLogin();
-
-           .authorizeRequests()
-                .antMatchers("/odontologos/**", "/paciente/**") //.hasRole("USER") // ** indica que accede a TODO
-                .hasAuthority("ADMIN")
-                .antMatchers("/alta-odontologos.html", "/index.html", "/alta-paciente.html", "/odontologos.html", "pacientes.html")
-                .hasAuthority("ADMIN")
+                .authorizeRequests()
+                //.antMatchers("/pacientes.html", "alta-pacientes.html","/odontologos.html", "alta-odontologos.html").hasAuthority("ADMIN")
+                .antMatchers("/pacientes/**","/odontologos/**").hasAuthority("ADMIN")
+                .antMatchers("/turnos/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/accesoDenegado.html");
-
+                .and().formLogin()
+                .and().logout();
     }
 
     @Override
