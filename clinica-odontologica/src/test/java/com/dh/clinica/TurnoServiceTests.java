@@ -54,7 +54,7 @@ public class TurnoServiceTests {
         Assert.assertNotNull(turnoService.buscar(1));
     }
     @Test
-    public void eliminarTurnoTest(){
+    public void eliminarTurnoTest() throws ResourceNotFoundException {
         turnoService.eliminar(1);
         Assert.assertFalse(turnoService.buscar(1).isPresent());
     }

@@ -2,6 +2,8 @@ package com.dh.clinica;
 
 
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Domicilio;
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.service.DomicilioService;
@@ -41,7 +43,7 @@ public class PacienteServiceTest {
     }
 
     @Test
-    public void agregarYBuscarPacienteTest() {
+    public void agregarYBuscarPacienteTest() throws BadRequestException {
         this.cargarDataSet();
         Domicilio domicilio = new Domicilio("Calle", "123", "Temperley", "Buenos Aires");
         Paciente p = pacienteService.guardar(new Paciente("Tomas", "Pereyra", "12345678", new Date(), domicilio));
@@ -50,7 +52,7 @@ public class PacienteServiceTest {
     }
 
     @Test
-    public void eliminarPacienteTest() {
+    public void eliminarPacienteTest() throws ResourceNotFoundException, BadRequestException {
         pacienteService.eliminar(3);
         Assert.assertTrue(pacienteService.buscar(3).isEmpty());
 

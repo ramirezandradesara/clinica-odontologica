@@ -1,6 +1,9 @@
 package com.dh.clinica.service;
 
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
+import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.repository.impl.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import java.util.Optional;
 public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
+    private Object Number;
 
     @Autowired
     public PacienteService(PacienteRepository pacienteRepository) {
@@ -25,7 +29,9 @@ public class PacienteService {
        return pacienteRepository.save(p);
     }
 
-    public Optional<Paciente> buscar(Integer id) {
+    public Optional<Paciente> buscar(Integer id) throws BadRequestException {
+        if(!pacienteRepository.existsById(id))
+            throw new BadRequestException("No existe el paciente con ID: " + id);
         return pacienteRepository.findById(id);
     }
 
@@ -33,11 +39,17 @@ public class PacienteService {
         return pacienteRepository.findAll();
     }
 
-    public void eliminar(Integer id) {
+
+    public void eliminar(Integer id) throws ResourceNotFoundException, BadRequestException {
+        if (!buscar(id).isPresent())
+            throw new ResourceNotFoundException("No existe el paciente con ID: " + id);
         pacienteRepository.deleteById(id);
     }
 
-    public Paciente actualizar(Paciente p) {
-        return pacienteRepository.save(p);
+    public Paciente actualizar(Paciente paciente) throws ResourceNotFoundException, BadRequestException {
+        if(buscar(paciente.getId()) == null)
+            throw new ResourceNotFoundException("No existe el paciente con ID: " + paciente.getId());
+        return pacienteRepository.save(paciente);
     }
+
 }

@@ -54,11 +54,10 @@ public class   OdontologoService {
     } */
 
     public void eliminarOdontologo(Integer id) throws BadRequestException, ResourceNotFoundException{
-        if (!odontologoRepository.existsById(id))
-            throw new ResourceNotFoundException("No existe el odontólogo con id: " + id);
+        if (!buscar(id).isPresent())
+            throw new ResourceNotFoundException("No existe el odontólogo con ID: " + id);
         odontologoRepository.deleteById(id);
     }
-
 
 
     /* public Optional<Odontologo> buscar(Integer id) {
@@ -67,7 +66,7 @@ public class   OdontologoService {
 
     public Optional<Odontologo> buscar(Integer id) throws BadRequestException {
         if(!odontologoRepository.existsById(id))
-            throw new BadRequestException("El odontologo con id " + id + " no existe.");
+            throw new BadRequestException("No existe el odontólogo con ID: " + id);
         return odontologoRepository.findById(id);
     }
 
@@ -77,10 +76,9 @@ public class   OdontologoService {
     } */
 
 
-    //PLAYGRPUND NO FUNCIONA :(
     public Odontologo actualizar(Odontologo odontologo) throws ResourceNotFoundException, BadRequestException {
         if(buscar(odontologo.getId()) == null)
-            throw new ResourceNotFoundException("No existe el odontologo" + odontologo.getId()); // le saque el id
+            throw new ResourceNotFoundException("No existe el odontólogo con ID: " + odontologo.getId());
         return odontologoRepository.save(odontologo);
     }
 

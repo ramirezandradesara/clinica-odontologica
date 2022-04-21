@@ -87,12 +87,11 @@ public class OdontologoController {
     }
 
 
-
-
     @GetMapping
     public ResponseEntity<List<Odontologo>> buscarTodos(){
         return ResponseEntity.ok(odontologoService.buscarTodos());
     }
+
 
     @GetMapping("/traerApellido/{apellido}")
     public ResponseEntity<Odontologo> odontologoApellido (@PathVariable String apellido){
@@ -104,8 +103,4 @@ public class OdontologoController {
         }
     }
 
-    /*@ExceptionHandler({ResourceNotFoundException.class})
-    public ResponseEntity<String> procesarErrorNotFound(ResourceNotFoundException ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }*/
 }

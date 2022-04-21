@@ -1,5 +1,7 @@
 package com.dh.clinica.controller;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.service.PacienteService;
@@ -22,36 +24,23 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> buscar(@PathVariable Integer id) {
+    public ResponseEntity<Paciente> buscar(@PathVariable Integer id) throws BadRequestException{
         Paciente paciente = pacienteService.buscar(id).orElse(null);
 
         return ResponseEntity.ok(paciente);
     }
 
+
     @PutMapping()
-    public ResponseEntity<Paciente> actualizar(@RequestBody Paciente paciente) {
-        ResponseEntity<Paciente> response = null;
-
-        if (paciente.getId() != null && pacienteService.buscar(paciente.getId()).isPresent())
-            response = ResponseEntity.ok(pacienteService.actualizar(paciente));
-        else
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-        return response;
+    public ResponseEntity<Paciente> actualizar(@RequestBody Paciente paciente) throws BadRequestException, ResourceNotFoundException {
+        return ResponseEntity.ok(pacienteService.actualizar(paciente));
     }
 
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
-        ResponseEntity<String> response = null;
-
-        if (pacienteService.buscar(id).isPresent()) {
-            pacienteService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        return response;
+    public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
+        pacienteService.eliminar(id);
+        return ResponseEntity.ok("Se eliminó el paciente con ID: " + id);
     }
 
     @GetMapping
