@@ -32,7 +32,6 @@ public class OdontologoController {
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
         Odontologo odontologo = odontologoService.buscar(id).orElse(null);
-
         return ResponseEntity.ok(odontologo);
     }
 

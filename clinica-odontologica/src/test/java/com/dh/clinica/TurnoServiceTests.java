@@ -40,8 +40,7 @@ public class TurnoServiceTests {
     }
 
     @Test
-    public void altaTurnoTest() throws ResourceNotFoundException, BadRequestException {
-
+    public void altaTurnoTest() throws BadRequestException {
 
         this.cargarDataSet();
         turnoService.registrarTurno(new Turno(pacienteService.buscar(1).get(),odontologoService.buscar(1).get(),new Date()));
@@ -53,13 +52,12 @@ public class TurnoServiceTests {
     public void buscarTurnoTest() throws BadRequestException {
         Assert.assertNotNull(turnoService.buscar(1));
     }
+
     @Test
     public void eliminarTurnoTest() throws ResourceNotFoundException, BadRequestException {
         turnoService.eliminar(1);
         Assert.assertFalse(turnoService.buscar(1).isPresent());
     }
-
-
 
 
 }

@@ -38,10 +38,9 @@ public class OdontologoService {
         saveOdontologo(odontologoDTO);
     }
 
-    public Odontologo registrarOdontologo(Odontologo odontologo) { // llama a la funcion de saveOdontologo
+   public Odontologo registrarOdontologo(Odontologo odontologo) { // llama a la funcion de saveOdontologo
         return odontologoRepository.save(odontologo);
     }
-
 
 
     public void eliminarOdontologo(Integer id) throws BadRequestException, ResourceNotFoundException{
