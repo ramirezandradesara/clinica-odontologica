@@ -29,13 +29,6 @@ public class OdontologoController {
 
     }
 
-    /* @PostMapping()
-    public ResponseEntity<Odontologo> registrarOdontologo(@RequestBody Odontologo odontologo) {
-
-        return ResponseEntity.ok(odontologoService.registrarOdontologo(odontologo));
-
-    } */
-
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
         Odontologo odontologo = odontologoService.buscar(id).orElse(null);
@@ -43,42 +36,12 @@ public class OdontologoController {
         return ResponseEntity.ok(odontologo);
     }
 
-   /* @PutMapping()
-    public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) {
-        ResponseEntity<Odontologo> response = null;
-
-        if (odontologo.getId() != null && odontologoService.buscar(odontologo.getId()).isPresent())
-            response = ResponseEntity.ok(odontologoService.actualizar(odontologo));
-        else
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-        return response;
-    } */
 
     @PutMapping()
     public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) throws ResourceNotFoundException, BadRequestException {
         return ResponseEntity.ok(odontologoService.actualizar(odontologo));
     }
 
-    /* @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
-        ResponseEntity<String> response = null;
-
-        if (odontologoService.buscar(id).isPresent()) {
-            odontologoService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        return response;
-    }*/
-
-    /* @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException {
-        odontologoService.eliminar(id);
-        return ResponseEntity.ok("Odontologo eliminado");
-    }*/
 
     @DeleteMapping("/{id}")
     public ResponseEntity eliminarPorId(@PathVariable Integer id) throws BadRequestException, ResourceNotFoundException {

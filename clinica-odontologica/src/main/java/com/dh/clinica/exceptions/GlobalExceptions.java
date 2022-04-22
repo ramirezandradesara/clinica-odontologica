@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
  @ControllerAdvice
 public class GlobalExceptions {
-   // @ExceptionHandler({ResourceNotFoundException.class})
    @ExceptionHandler({BadRequestException.class})
     public ResponseEntity<String> procesarErrorBadRequest(BadRequestException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage()); // envia puntualmente la excepcion

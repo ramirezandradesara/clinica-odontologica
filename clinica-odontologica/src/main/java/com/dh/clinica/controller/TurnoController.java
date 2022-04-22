@@ -2,6 +2,8 @@ package com.dh.clinica.controller;
 
 import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
+import com.dh.clinica.model.Odontologo;
+import com.dh.clinica.model.Paciente;
 import com.dh.clinica.model.Turno;
 import com.dh.clinica.service.OdontologoService;
 import com.dh.clinica.service.PacienteService;
@@ -25,8 +27,8 @@ public class TurnoController {
     private OdontologoService odontologoService;
 
     @PostMapping
-    public ResponseEntity<Turno> registrarTurno(@RequestBody Turno turno) throws ResourceNotFoundException, BadRequestException {
-        ResponseEntity<Turno> response;
+    public ResponseEntity<Turno> registrarTurno(@RequestBody Turno turno) throws BadRequestException {
+       ResponseEntity<Turno> response;
         if (pacienteService.buscar(turno.getPaciente().getId()).isPresent() && odontologoService.buscar(turno.getOdontologo().getId()).isPresent())
             response = ResponseEntity.ok(turnoService.registrarTurno(turno));
         else
@@ -41,22 +43,27 @@ public class TurnoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException {
-        ResponseEntity<String> response;
-        if (turnoService.buscar(id).isPresent()) {
-            turnoService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return response;
+    public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
+        turnoService.eliminar(id);
+        return ResponseEntity.ok("Se eliminó el turno con ID " + id);
     }
 
     @PutMapping
-    public ResponseEntity<Turno> actualizarTurno(@RequestBody Turno turno) {
-        return ResponseEntity.ok(turnoService.actualizar(turno));
+    public ResponseEntity<Turno> actualizarTurno(@RequestBody Turno turno) throws BadRequestException {
+        ResponseEntity<Turno> response;
+        if (pacienteService.buscar(turno.getPaciente().getId()).isPresent() && odontologoService.buscar(turno.getOdontologo().getId()).isPresent())
+            response = ResponseEntity.ok(turnoService.registrarTurno(turno));
+        else
+            response = ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 
+        return response;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Turno> buscar(@PathVariable Integer id) throws BadRequestException{
+        Turno turno = turnoService.buscar(id).orElse(null);
+
+        return ResponseEntity.ok(turno);
+    }
 
 }

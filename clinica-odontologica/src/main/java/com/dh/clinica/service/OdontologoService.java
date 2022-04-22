@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class   OdontologoService {
+public class OdontologoService {
 
     private final OdontologoRepository odontologoRepository;
 
@@ -42,53 +42,36 @@ public class   OdontologoService {
         return odontologoRepository.save(odontologo);
     }
 
-    /* public void eliminar(Integer id) {
-        odontologoRepository.deleteById(id);
-    } */
 
-    /*public void eliminar(Integer id) throws ResourceNotFoundException{
-        //if(buscar(id) == null)
-        if(!odontologoRepository.existsById(id))
-            throw new ResourceNotFoundException("No existe el odontologo con el id:" + id);
-        odontologoRepository.deleteById(id);
-    } */
 
     public void eliminarOdontologo(Integer id) throws BadRequestException, ResourceNotFoundException{
         if (!buscar(id).isPresent())
-            throw new ResourceNotFoundException("No existe el odontólogo con ID: " + id);
+            throw new ResourceNotFoundException("No existe el odontólogo con ID " + id);
         odontologoRepository.deleteById(id);
     }
-
-
-    /* public Optional<Odontologo> buscar(Integer id) {
-        return odontologoRepository.findById(id);
-    }*/
-
-    public Optional<Odontologo> buscar(Integer id) throws BadRequestException {
-        if(!odontologoRepository.existsById(id))
-            throw new BadRequestException("No existe el odontólogo con ID: " + id);
-        return odontologoRepository.findById(id);
-    }
-
-
-   /* public Odontologo actualizar(Odontologo odontologo) {
-        return odontologoRepository.save(odontologo);
-    } */
 
 
     public Odontologo actualizar(Odontologo odontologo) throws ResourceNotFoundException, BadRequestException {
         if(buscar(odontologo.getId()) == null)
-            throw new ResourceNotFoundException("No existe el odontólogo con ID: " + odontologo.getId());
+            throw new ResourceNotFoundException("No existe el odontólogo con ID " + odontologo.getId());
         return odontologoRepository.save(odontologo);
     }
+
+
+    public Optional<Odontologo> buscar(Integer id) throws BadRequestException {
+        if(!odontologoRepository.existsById(id))
+            throw new BadRequestException("No existe el odontólogo con ID " + id);
+        return odontologoRepository.findById(id);
+    }
+
 
     public Odontologo buscarOdontologoPorApellido (String apellido){
         return odontologoRepository.odontologoApellido(apellido);
    }
 
+
     public List<Odontologo> buscarTodos() {
         return odontologoRepository.findAll();
     }
-
 
 }

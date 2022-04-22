@@ -50,11 +50,11 @@ public class TurnoServiceTests {
 
     }
     @Test
-    public void buscarTurnoTest(){
+    public void buscarTurnoTest() throws BadRequestException {
         Assert.assertNotNull(turnoService.buscar(1));
     }
     @Test
-    public void eliminarTurnoTest() throws ResourceNotFoundException {
+    public void eliminarTurnoTest() throws ResourceNotFoundException, BadRequestException {
         turnoService.eliminar(1);
         Assert.assertFalse(turnoService.buscar(1).isPresent());
     }

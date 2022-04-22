@@ -1,5 +1,8 @@
 package com.dh.clinica.service;
 
+import com.dh.clinica.exceptions.BadRequestException;
+import com.dh.clinica.exceptions.ResourceNotFoundException;
+import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Turno;
 import com.dh.clinica.repository.impl.TurnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +29,23 @@ public class TurnoService {
         return turnoRepository.findAll();
     }
 
-    public void eliminar(Integer id) {
+    public void eliminar(Integer id) throws ResourceNotFoundException, BadRequestException {
+        if (!buscar(id).isPresent())
+            throw new ResourceNotFoundException("No existe el turno con ID: " + id);
         turnoRepository.deleteById(id);
     }
 
-    public Turno actualizar(Turno turno) {
+
+    public Turno actualizar(Turno turno) throws ResourceNotFoundException, BadRequestException {
+        if(buscar(turno.getId()) == null)
+            throw new ResourceNotFoundException("No existe el turno con ID: " + turno.getId());
         return turnoRepository.save(turno);
     }
 
-    public Optional<Turno> buscar(Integer id) {
+
+    public Optional<Turno> buscar(Integer id) throws BadRequestException {
+        if(!turnoRepository.existsById(id))
+            throw new BadRequestException("No existe el turno con ID " + id);
         return turnoRepository.findById(id);
     }
 

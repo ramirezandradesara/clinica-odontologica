@@ -29,11 +29,13 @@ public class PacienteService {
        return pacienteRepository.save(p);
     }
 
+
     public Optional<Paciente> buscar(Integer id) throws BadRequestException {
         if(!pacienteRepository.existsById(id))
-            throw new BadRequestException("No existe el paciente con ID: " + id);
+            throw new BadRequestException("No existe el paciente con ID " + id);
         return pacienteRepository.findById(id);
     }
+
 
     public List<Paciente> buscarTodos() {
         return pacienteRepository.findAll();
@@ -42,13 +44,14 @@ public class PacienteService {
 
     public void eliminar(Integer id) throws ResourceNotFoundException, BadRequestException {
         if (!buscar(id).isPresent())
-            throw new ResourceNotFoundException("No existe el paciente con ID: " + id);
+            throw new ResourceNotFoundException("No existe el paciente con ID " + id);
         pacienteRepository.deleteById(id);
     }
 
+
     public Paciente actualizar(Paciente paciente) throws ResourceNotFoundException, BadRequestException {
         if(buscar(paciente.getId()) == null)
-            throw new ResourceNotFoundException("No existe el paciente con ID: " + paciente.getId());
+            throw new ResourceNotFoundException("No existe el paciente con ID " + paciente.getId());
         return pacienteRepository.save(paciente);
     }
 
