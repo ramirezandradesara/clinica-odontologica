@@ -2,4 +2,8 @@
  [2022-04-2211:56:16] [ ERROR] [GlobalExceptionHandler:19] No existe el odontólogo con ID 1
  [2022-04-2211:56:23] [ ERROR] [GlobalExceptionHandler:19] No existe el odontólogo con ID 1
  [2022-04-2211:56:30] [ ERROR] [GlobalExceptionHandler:19] No existe el odontólogo con ID 2
+ [2022-04-2214:25:00] [ ERROR] [GlobalExceptionHandler:19] Required request body is missing: public org.springframework.http.ResponseEntity<?> com.dh.clinica.controller.OdontologoController.registrarOdontologo(com.dh.clinica.model.OdontologoDTO)
+ [2022-04-2214:25:13] [ ERROR] [GlobalExceptionHandler:19] No existe el odontólogo con ID 1
+ [2022-04-2216:42:33] [ ERROR] [GlobalExceptionHandler:19] No existe el turno con ID 7
+ [2022-04-2216:44:32] [ ERROR] [GlobalExceptionHandler:19] query did not return a unique result: 2; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 2
  

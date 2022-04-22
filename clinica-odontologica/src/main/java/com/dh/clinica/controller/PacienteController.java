@@ -23,6 +23,8 @@ public class PacienteController {
         return ResponseEntity.ok(pacienteService.guardar(paciente));
     }
 
+
+
     @GetMapping("/{id}")
     public ResponseEntity<Paciente> buscar(@PathVariable Integer id) throws BadRequestException{
         Paciente paciente = pacienteService.buscar(id).orElse(null);

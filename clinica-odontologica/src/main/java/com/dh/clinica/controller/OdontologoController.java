@@ -26,7 +26,6 @@ public class OdontologoController {
     public ResponseEntity<?> registrarOdontologo(@RequestBody OdontologoDTO odontologoDTO) {
         odontologoService.registrarOdontologo(odontologoDTO);
         return ResponseEntity.ok(HttpStatus.OK);
-
     }
 
     @GetMapping("/{id}")
@@ -56,8 +55,8 @@ public class OdontologoController {
 
 
     @GetMapping("/traerApellido/{apellido}")
-    public ResponseEntity<Odontologo> odontologoApellido (@PathVariable String apellido){
-        Odontologo odontologo = odontologoService.buscarOdontologoPorApellido(apellido);
+    public ResponseEntity<List<Odontologo>> odontologoApellido (@PathVariable String apellido){
+        List<Odontologo> odontologo = odontologoService.buscarOdontologoPorApellido(apellido);
         if(odontologo != null){
             return ResponseEntity.ok(odontologo);
         }else{

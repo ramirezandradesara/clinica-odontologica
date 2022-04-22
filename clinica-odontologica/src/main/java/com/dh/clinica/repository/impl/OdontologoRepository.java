@@ -14,7 +14,7 @@ import java.util.Set;
 public interface OdontologoRepository extends JpaRepository<Odontologo, Integer> {
 
     @Query("from Odontologo o where o.apellido like %:apellido%")
-    Odontologo odontologoApellido(String apellido);
+    List <Odontologo> odontologoApellido(String apellido);
 
 
 }

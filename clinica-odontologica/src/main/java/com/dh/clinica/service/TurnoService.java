@@ -30,14 +30,14 @@ public class TurnoService {
     }
 
     public void eliminar(Integer id) throws ResourceNotFoundException, BadRequestException {
-        if (!buscar(id).isPresent())
+        if (buscar(id).isEmpty())
             throw new ResourceNotFoundException("No existe el turno con ID: " + id);
         turnoRepository.deleteById(id);
     }
 
 
     public Turno actualizar(Turno turno) throws ResourceNotFoundException, BadRequestException {
-        if(buscar(turno.getId()) == null)
+        if(buscar(turno.getId()).isEmpty())
             throw new ResourceNotFoundException("No existe el turno con ID: " + turno.getId());
         return turnoRepository.save(turno);
     }

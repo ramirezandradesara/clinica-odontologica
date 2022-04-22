@@ -44,14 +44,14 @@ public class OdontologoService {
 
 
     public void eliminarOdontologo(Integer id) throws BadRequestException, ResourceNotFoundException{
-        if (!buscar(id).isPresent())
+        if (buscar(id).isEmpty())
             throw new ResourceNotFoundException("No existe el odontólogo con ID " + id);
         odontologoRepository.deleteById(id);
     }
 
 
     public Odontologo actualizar(Odontologo odontologo) throws ResourceNotFoundException, BadRequestException {
-        if(buscar(odontologo.getId()) == null)
+        if(buscar(odontologo.getId()).isEmpty())
             throw new ResourceNotFoundException("No existe el odontólogo con ID " + odontologo.getId());
         return odontologoRepository.save(odontologo);
     }
@@ -64,7 +64,7 @@ public class OdontologoService {
     }
 
 
-    public Odontologo buscarOdontologoPorApellido (String apellido){
+    public List <Odontologo> buscarOdontologoPorApellido (String apellido){
         return odontologoRepository.odontologoApellido(apellido);
    }
 

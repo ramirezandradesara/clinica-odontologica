@@ -40,6 +40,8 @@ public class IntegracionTurnosTest {
 
     public void cargarDataSet() throws ResourceNotFoundException, BadRequestException {
         Domicilio domicilio = new Domicilio("Av Santa fe", "444", "CABA", "Buenos Aires");
+        // Paciente p = pacienteService.guardar(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
+
         Paciente p = pacienteService.guardar(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
         this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
         turnoService.registrarTurno(new Turno(pacienteService.buscar(1).get(),odontologoService.buscar(1).get(),new Date()));
