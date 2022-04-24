@@ -29,7 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/turnos.html", "alta-turnos.html").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin()
-                .and().logout();
+                .and().logout()
+                .and().exceptionHandling().accessDeniedPage("/accessDeniedPage.html");
+
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.OdontologoDTO;
 import com.dh.clinica.service.OdontologoService;
-
+import org.junit.jupiter.api.Assertions.*;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
@@ -55,20 +56,9 @@ public class OdontologoServiceTests {
 
     @Test
     public void eliminarOdontologoTest() throws BadRequestException, ResourceNotFoundException {
-       /* odontologoService.eliminarOdontologo(1);
-        Assert.assertTrue(odontologoService.buscar(1).isEmpty()); */
-
-        /* System.out.println(odontologo.getId());
-      // odontologoService.eliminarOdontologo(odontologo.getId());
-        odontologoService.eliminarOdontologo(3);
-        Assert.assertNull(odontologo);
-        //Assert.assertTrue(!odontologoService.eliminarOdontologo();); */
-
 
         Odontologo odontologo = odontologoService.registrarOdontologo(new Odontologo("Juan", "Ramirez", 348971960));
-        odontologoService.eliminarOdontologo(3);
-        Assert.assertNull(odontologo);
-        Assert.assertNull(odontologo.getId());
-
+        odontologoService.eliminarOdontologo(odontologo.getId());
+        assertThrows(BadRequestException.class, () -> odontologoService.buscar(odontologo.getId()), "No se encontró el odontólogo");
     }
 }

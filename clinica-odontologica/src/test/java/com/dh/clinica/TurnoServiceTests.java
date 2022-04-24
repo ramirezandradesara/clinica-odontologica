@@ -20,6 +20,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -44,20 +46,20 @@ public class TurnoServiceTests {
 
         this.cargarDataSet();
         turnoService.registrarTurno(new Turno(pacienteService.buscar(1).get(),odontologoService.buscar(1).get(),new Date()));
-
         Assert.assertNotNull(turnoService.buscar(1));
-
     }
+
+
     @Test
     public void buscarTurnoTest() throws BadRequestException {
         Assert.assertNotNull(turnoService.buscar(1));
     }
 
+
     @Test
     public void eliminarTurnoTest() throws ResourceNotFoundException, BadRequestException {
         turnoService.eliminar(1);
-        Assert.assertFalse(turnoService.buscar(1).isPresent());
+        assertThrows(BadRequestException.class, () -> turnoService.buscar(1), "No se encontró el turno.");
     }
-
 
 }

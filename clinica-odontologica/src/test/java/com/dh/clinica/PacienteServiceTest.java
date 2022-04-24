@@ -5,6 +5,7 @@ package com.dh.clinica;
 import com.dh.clinica.exceptions.BadRequestException;
 import com.dh.clinica.exceptions.ResourceNotFoundException;
 import com.dh.clinica.model.Domicilio;
+import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.model.Paciente;
 import com.dh.clinica.service.DomicilioService;
 import com.dh.clinica.service.PacienteService;
@@ -24,6 +25,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -53,22 +56,20 @@ public class PacienteServiceTest {
 
     @Test
     public void eliminarPacienteTest() throws ResourceNotFoundException, BadRequestException {
-        pacienteService.eliminar(3);
-        Assert.assertTrue(pacienteService.buscar(3).isEmpty());
-
+        pacienteService.eliminar(1);
+        assertThrows(BadRequestException.class, () -> pacienteService.buscar(1), "No se encontró el paciente.");
     }
 
     @Test
     public void traerTodos() {
         List<Paciente> pacientes = pacienteService.buscarTodos();
         Assert.assertTrue(!pacientes.isEmpty());
-        //Assert.assertTrue(pacientes.size() == 2);
-        //System.out.println(pacientes);
+        Assert.assertTrue(pacientes.size() == 2);
+        System.out.println(pacienteService.buscarTodos());
     }
 
     @Test
     public void buscarTurnoTest() throws BadRequestException {
-        Assert.assertNotNull(pacienteService.buscar(1));
+        Assert.assertNotNull(pacienteService.buscar(2));
     }
-
 }

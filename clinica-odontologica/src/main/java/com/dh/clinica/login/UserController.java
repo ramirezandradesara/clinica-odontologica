@@ -8,7 +8,7 @@ public class UserController {
 
     @GetMapping("/accesoDenegado")
     public String home(){
-        return "<h1> Usted no tiene permiso para entrar  </h1>";
+        return "<h1> Usted no tiene permiso para entrar </h1>";
     }
    /* @GetMapping("/user")
     public String user(){
