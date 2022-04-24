@@ -32,7 +32,7 @@ $(document).ready(function(){
 
                     let successAlert = '<div class="alert alert-success alert-dismissible">' +
                                             '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                                            '<strong> Paciente actualizado </strong></div>'
+                                            '<strong> Paciente actualizado, recargar página </strong></div>'
 
 
                     $("#tr_" + pacienteId + " td.td_first_name").text(paciente.nombre);

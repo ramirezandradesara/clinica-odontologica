@@ -34,7 +34,7 @@ public class TurnoServiceTests {
     @Autowired
     private TurnoService turnoService;
 
-    public void cargarDataSet() {
+    public void cargarDataSet() throws BadRequestException {
         Domicilio domicilio = new Domicilio("Av Santa fe", "444", "CABA", "Buenos Aires");
         Paciente p = pacienteService.guardar(new Paciente("Santiago", "Paz", "88888888", new Date(), domicilio));
         this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));

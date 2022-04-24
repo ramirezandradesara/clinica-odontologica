@@ -23,9 +23,9 @@ public class OdontologoController {
 
 
     @PostMapping()
-    public ResponseEntity<?> registrarOdontologo(@RequestBody OdontologoDTO odontologoDTO) {
+    public ResponseEntity<?> registrarOdontologo(@RequestBody OdontologoDTO odontologoDTO) throws BadRequestException {
         odontologoService.registrarOdontologo(odontologoDTO);
-        return ResponseEntity.ok(HttpStatus.OK);
+       return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -44,7 +44,7 @@ public class OdontologoController {
     @DeleteMapping("/{id}")
     public ResponseEntity eliminarPorId(@PathVariable Integer id) throws BadRequestException, ResourceNotFoundException {
         odontologoService.eliminarOdontologo(id);
-        return ResponseEntity.ok("Se eliminó el odontólogo con ID: " + id);
+        return ResponseEntity.ok("Se eliminó el odontólogo con ID " + id);
     }
 
 

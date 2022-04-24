@@ -24,7 +24,6 @@ public class PacienteController {
     }
 
 
-
     @GetMapping("/{id}")
     public ResponseEntity<Paciente> buscar(@PathVariable Integer id) throws BadRequestException{
         Paciente paciente = pacienteService.buscar(id).orElse(null);
@@ -40,9 +39,9 @@ public class PacienteController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
+    public ResponseEntity<?> eliminar(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
         pacienteService.eliminar(id);
-        return ResponseEntity.ok("Se eliminó el paciente con ID: " + id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping

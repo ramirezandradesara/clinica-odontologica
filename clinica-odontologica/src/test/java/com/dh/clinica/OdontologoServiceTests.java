@@ -30,12 +30,12 @@ public class OdontologoServiceTests {
     @Autowired
     private OdontologoService odontologoService;
 
-    public void cargarDataSet() {
+    public void cargarDataSet() throws BadRequestException {
         this.odontologoService.registrarOdontologo(new Odontologo("Santiago", "Paz", 3455647));
     }
 
     @Test
-    public void agregarOdontologo() {
+    public void agregarOdontologo() throws BadRequestException {
         this.cargarDataSet();
         Odontologo odontologo = odontologoService.registrarOdontologo(new Odontologo("Juan", "Ramirez", 348971960));
         Assert.assertTrue(odontologo.getId() != null);

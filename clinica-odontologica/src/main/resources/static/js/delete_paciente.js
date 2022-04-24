@@ -33,7 +33,7 @@
             type: 'DELETE',
             success: function(response) {
                 $("div.modal-body")
-                    .text("Eliminade correctamente !");
+                    .text("Eliminado correctamente");
 
                 $("#model-delete-btn").css({"display": "none"});
                 $("button.btn.btn-secondary").text("Close");
@@ -51,4 +51,5 @@
         });
     });
 });*/
+
 

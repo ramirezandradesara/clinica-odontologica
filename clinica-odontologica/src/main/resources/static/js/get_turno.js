@@ -41,8 +41,8 @@ window.addEventListener('load', function () {
             //como ultima columna el boton eliminar
             turnoRow.innerHTML = '<td>' + updateButton + '</td>' +
                     '<td class=\"td_fecha\">' + turno.date + '</td>' +
-                    '<td class=\"td_paciente_id\">' + turno.paciente.id + '</td>' +
-                    '<td class=\"td_odontologo_id\">' +turno.odontologo.id + '</td>' +
+                    '<td class=\"td_paciente_id\">' + turno.paciente.apellido.toUpperCase() + ', ' + turno.paciente.nombre + '</td>' +
+                    '<td class=\"td_odontologo_id\">' + turno.odontologo.apellido.toUpperCase() + ', '+ turno.odontologo.nombre + '</td>' +
                     '<td>' + deleteButton + '</td>';
         };
     })

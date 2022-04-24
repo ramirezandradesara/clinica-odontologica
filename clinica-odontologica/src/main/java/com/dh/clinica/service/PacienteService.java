@@ -21,7 +21,6 @@ public class PacienteService {
 
 
     public Paciente guardar(Paciente p) {
-        System.out.println(p);
         return pacienteRepository.save(p);
     }
 
